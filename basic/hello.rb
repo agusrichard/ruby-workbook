@@ -6,3 +6,5 @@ END {
 BEGIN {
    puts "Initializing Ruby Program"
 }
+
+puts "Sekardayu Hana Pradiani"
