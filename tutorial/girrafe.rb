@@ -1,4 +1,4 @@
-name = "Sekardayu Hana Pradiani"
+name = "Saskia Nurul Azhimas"
 
 puts "Hello, #{name}!"
 
