@@ -1,16 +1,24 @@
 class Customer
-  @@no_of_customers = 0
-  def initialize(id, name, addr)
-    @cust_id = id
-    @cust_name = name
-    @cust_addr = addr
-    @@no_of_customers += 1
+  @@total_customers = 0
+  def initialize(name, balance)
+    @name = name
+    @balance = balance
+    @@total_customers += 1
   end
-  def talk()
-    puts "Hi, I am #@cust_name"
+
+  def display_details
+    puts "My name is #{@name} with balance of #{@balance}"
+  end
+  
+  def total_no_of_customers
+    puts @@total_customers
   end
 end
 
-cust1 = Customer.new('1', 'John', 'Wisdom Apartments, Ludhiya')
-cust2 = Customer.new('2', 'Pete', 'White House, Washington')
-cust1.talk
+sekar = Customer.new("sekar", 24)
+sekar.display_details
+
+saski = Customer.new("saskia", 22)
+saski.display_details
+
+sekar.total_no_of_customers
