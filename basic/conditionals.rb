@@ -10,6 +10,7 @@ unless age > 100
     puts "At least you're not ancient!"
 end 
 
+puts "You're unbearable!" if age > 17
 puts "You're so annoying" unless age < 10
 
 case age
