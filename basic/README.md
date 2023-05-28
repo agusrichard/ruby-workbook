@@ -5,6 +5,10 @@
 ## List of Contents:
 ### 1. [Syntax](#content-1)
 ### 2. [Class and Object](#content-2)
+### 3. [Variables](#content-3)
+### 4. [Operators](#content-4)
+### 5. [Comments](#content-5)
+### 6. [If... Else... Case](#content-6)
 
 <br />
 
@@ -12,7 +16,7 @@
 
 ## Contents:
 
-## [Syntax](https://google.com) <span id="content-1"></span>
+## [Syntax](#list-of-contents) <span id="content-1"></span>
 - Whitespace characters such as spaces and tabs are generally ignored in Ruby code, except when they appear in strings.
 - Sometimes, however, they are used to interpret ambiguous statements. Interpretations of this sort produce warnings when the -w option is enabled.
   ```text
@@ -72,7 +76,7 @@ I said that already.
 =end
 ```
 
-## [Class and Object](https://google.com) <span id="content-2"></span>
+## [Class and Object](#list-of-contents) <span id="content-2"></span>
 - Example:
   ```ruby
   Class Vehicle {
@@ -128,7 +132,242 @@ I said that already.
     object = Sample. new
     object.hello
     ```
+
+## [Variables](#list-of-contents) <span id="content-3"></span>
+
+### Global Variables
+- Global variables begin with $. Uninitialized global variables have the value nil and produce warnings with the -w option.
+- It's not recommended to use global variables.
+- Snippet:
+  ```ruby
+  #!/usr/bin/ruby
+
+  $global_variable = 10
+  class Class1
+     def print_global
+        puts "Global variable in Class1 is #$global_variable"
+     end
+  end
+  class Class2
+     def print_global
+        puts "Global variable in Class2 is #$global_variable"
+     end
+  end
+
+  class1obj = Class1.new
+  class1obj.print_global
+  class2obj = Class2.new
+  class2obj.print_global
+  ```
+
+### Instance Variables
+- Instance variables begin with @.
+- Uninitialized instance variables have the value nil and produce warnings with the -w option.
+- Snippet:
+  ```ruby
+  #!/usr/bin/ruby
+
+  class Customer
+     def initialize(id, name, addr)
+        @cust_id = id
+        @cust_name = name
+        @cust_addr = addr
+     end
+     def display_details()
+        puts "Customer id #@cust_id"
+        puts "Customer name #@cust_name"
+        puts "Customer address #@cust_addr"
+     end
+  end
+
+  # Create Objects
+  cust1 = Customer.new("1", "John", "Wisdom Apartments, Ludhiya")
+  cust2 = Customer.new("2", "Poul", "New Empire road, Khandala")
+
+  # Call Methods
+  cust1.display_details()
+  cust2.display_details()
+  ```
   
+### Class Variables
+- Class variables begin with @@ and must be initialized before they can be used in method definitions.
+- Referencing an uninitialized class variable produces an error. Class variables are shared among descendants of the class or module in which the class variables are defined.
+- Overriding class variables produce warnings with the -w option.
+- Snippet:
+  ```ruby
+  class Customer
+     @@no_of_customers = 0
+     def initialize(id, name, addr)
+        @cust_id = id
+        @cust_name = name
+        @cust_addr = addr
+     end
+     def display_details()
+        puts "Customer id #@cust_id"
+        puts "Customer name #@cust_name"
+        puts "Customer address #@cust_addr"
+     end
+     def total_no_of_customers()
+        @@no_of_customers += 1
+        puts "Total number of customers: #@@no_of_customers"
+     end
+  end
+
+  # Create Objects
+  cust1 = Customer.new("1", "John", "Wisdom Apartments, Ludhiya")
+  cust2 = Customer.new("2", "Poul", "New Empire road, Khandala")
+
+  # Call Methods
+  cust1.total_no_of_customers()
+  cust2.total_no_of_customers()
+  ```
+### Local Variables
+- Local variables begin with a lowercase letter or _. The scope of a local variable ranges from class, module, def, or do to the corresponding end or from a block's opening brace to its close brace {}.
+- When an uninitialized local variable is referenced, it is interpreted as a call to a method that has no arguments.
+- Assignment to uninitialized local variables also serves as variable declaration. The variables start to exist until the end of the current scope is reached. The lifetime of local variables is determined when Ruby parses the program.
+
+### Constants
+- Constants begin with an uppercase letter. Constants defined within a class or module can be accessed from within that class or module, and those defined outside a class or module can be accessed globally.
+- Constants may not be defined within methods. Referencing an uninitialized constant produces an error. Making an assignment to a constant that is already initialized produces a warning.
+- Snippet:
+  ```rubu
+  #!/usr/bin/ruby
+
+  class Example
+     VAR1 = 100
+     VAR2 = 200
+     def show
+        puts "Value of first Constant is #{VAR1}"
+        puts "Value of second Constant is #{VAR2}"
+     end
+  end
+
+  # Create Objects
+  object = Example.new()
+  object.show
+  ```
+
+### Pseudo-Variables
+- They are special variables that have the appearance of local variables but behave like constants. You cannot assign any value to these variables.
+
+
+## [Operators](#list-of-contents) <span id="content-4"></span>
+
+- Snippet:
+  ```ruby
+  a, b, c = 10, 20, 30
+  a, b = b, c
+  ```
+- Ruby Ternary Operators:
+```text
+If Condition is true ? Then value X : Otherwise value Y
+```
+- Ruby defined? Operators
+  ```ruby
+  foo = 42
+  defined? foo    # => "local-variable"
+  defined? $_     # => "global-variable"
+  defined? bar    # => nil (undefined)
+  ```
+
+### Ruby Dot "." and Double Colon "::" Operators
+- Snippet
+  ```ruby
+  MR_COUNT = 0         # constant defined on main Object class
+  module Foo
+     MR_COUNT = 0
+     ::MR_COUNT = 1    # set global count to 1
+     MR_COUNT = 2      # set local count to 2
+  end
+  puts MR_COUNT        # this is the global constant
+  puts Foo::MR_COUNT   # this is the local "Foo" constant
+  ```
+- Snippet:
+  ```ruby
+  CONST = ' out there'
+  class Inside_one
+     CONST = proc {' in there'}
+     def where_is_my_CONST
+        ::CONST + ' inside one'
+     end
+  end
+  class Inside_two
+     CONST = ' inside two'
+     def where_is_my_CONST
+        CONST
+     end
+  end
+  puts Inside_one.new.where_is_my_CONST
+  puts Inside_two.new.where_is_my_CONST
+  puts Object::CONST + Inside_two::CONST
+  puts Inside_two::CONST + CONST
+  puts Inside_one::CONST
+  puts Inside_one::CONST.call + Inside_two::CONST
+  ```
+
+## [Comments](#list-of-contents) <span id="content-5"></span>
+- Multiline Comments:
+  ```ruby
+  puts "Hello, Ruby!"
+
+  =begin
+  This is a multiline comment and con spwan as many lines as you
+  like. But =begin and =end should come in the first line only. 
+  =end
+  ```
+
+## [ if...else, case, unless](#list-of-contents) <span id="content-6"></span>
+- If else:
+  ```rubu
+  x = 1
+  if x > 2
+     puts "x is greater than 2"
+  elsif x <= 2 and x!=0
+     puts "x is 1"
+  else
+     puts "I can't guess the number"
+  end 
+  ```
+- If modifier:
+  ```ruby
+  $debug = 1
+  print "debug\n" if $debug
+  ``` 
+- Unless statement:
+  ```ruby
+  x = 1 
+  unless x>=2
+     puts "x is less than 2"
+   else
+     puts "x is greater than 2"
+  end``
+  ```
+- Unless modifier
+  ```ruby
+  $var =  1
+  print "1 -- Value is set\n" if $var
+  print "2 -- Value is set\n" unless $var
+
+  $var = false
+  print "3 -- Value is set\n" unless $var
+  ```
+- Case statement
+  ```ruby
+  $age =  5
+  case $age
+  when 0 .. 2
+     puts "baby"
+  when 3 .. 6
+     puts "little child"
+  when 7 .. 12
+     puts "child"
+  when 13 .. 18
+     puts "youth"
+  else
+     puts "adult"
+  end
+  ```
+
 
 **[⬆ back to top](#list-of-contents)**
 
