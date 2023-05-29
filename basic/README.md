@@ -10,6 +10,7 @@
 ### 5. [Comments](#content-5)
 ### 6. [If... Else... Case](#content-6)
 ### 7. [Loops](#content-7)
+### 8. [Methods](#content-8)
 
 <br />
 
@@ -483,7 +484,72 @@ If Condition is true ? Then value X : Otherwise value Y
   end
   ```
 
+## [Methods](#list-of-contents) <span id="content-8"></span>
+- Method names should begin with a lowercase letter. If you begin a method name with an uppercase letter, Ruby might think that it is a constant and hence can parse the call incorrectly.
+- Snippet:
+  ```ruby
+  def test(a1 = "Ruby", a2 = "Perl")
+     puts "The programming language is #{a1}"
+     puts "The programming language is #{a2}"
+  end
+  test "C", "C++"
+  test
+  ```
+- Every method in Ruby returns a value by default. This returned value will be the value of the last statement.
+- Snippet:
+  ```ruby
+  def test
+     i = 100
+     j = 10
+     k = 0
+  end
+  # return k = 0
+  ```
+- Snippet:
+  ```ruby
+  def test
+     i = 100
+     j = 200
+     k = 300
+  return i, j, k
+  end
+  var = test
+  puts var
+  ```
+- Variable number of parameters:
+  ```ruby
+  #!/usr/bin/ruby
 
+  def sample (*test)
+     puts "The number of parameters is #{test.length}"
+     for i in 0...test.length
+        puts "The parameters are #{test[i]}"
+     end
+  end
+  sample "Zara", "6", "F"
+  sample "Mac", "36", "M", "MCA"
+  ```
+- When a method is defined outside of the class definition, the method is marked as private by default.
+- On the other hand, the methods defined in the class definition are marked as public by default.
+- The default visibility and the private mark of the methods can be changed by public or private of the Module.
+- Whenever you want to access a method of a class, you first need to instantiate the class. Then, using the object, you can access any member of the class.
+- Snippet:
+  ```ruby
+  class Accounts
+     def reading_charge
+     end
+     def Accounts.return_date
+     end
+  end
+
+  Accounts.return_date
+  ```
+- Alias statement: 
+  ```ruby
+  alias foo bar
+  alias $MATCH $&
+  ```
+- undef Statement: This cancels the method definition. An undef cannot appear in the method body.
 
 **[⬆ back to top](#list-of-contents)**
 
