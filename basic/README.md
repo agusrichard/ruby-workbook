@@ -9,6 +9,7 @@
 ### 4. [Operators](#content-4)
 ### 5. [Comments](#content-5)
 ### 6. [If... Else... Case](#content-6)
+### 7. [Loops](#content-7)
 
 <br />
 
@@ -367,6 +368,121 @@ If Condition is true ? Then value X : Otherwise value Y
      puts "adult"
   end
   ```
+
+## [Loops](#list-of-contents) <span id="content-7"></span>
+
+### while Statement
+- Snippet:
+  ```ruby
+  $i = 0
+  $num = 5
+
+  while $i < $num  do
+     puts("Inside the loop i = #$i" )
+     $i +=1
+  end
+  ```
+
+### while modifier
+- Snippet:
+  ```ruby
+  $i = 0
+  $num = 5
+  begin
+     puts("Inside the loop i = #$i" )
+     $i +=1
+  end while $i < $num
+  ```
+  
+### until Statement
+- Snippet:
+  ```ruby
+  $i = 0
+  $num = 5
+
+  until $i > $num  do
+     puts("Inside the loop i = #$i" )
+     $i +=1;
+  end
+  ```
+
+### until modifier
+- Snippet:
+  ```ruby
+  $i = 0
+  $num = 5
+  begin
+     puts("Inside the loop i = #$i" )
+     $i +=1;
+  end until $i > $num
+  ```
+
+### for Statement
+- Snippet:
+  ```ruby
+  for i in 0..5
+     puts "Value of local variable is #{i}"
+  end
+  
+  (0..5).each do |i|
+     puts "Value of local variable is #{i}"
+  end
+  ```
+  
+### break Statement
+- Snippet:
+  ```ruby
+  for i in 0..5
+     if i > 2 then
+        break
+     end
+     puts "Value of local variable is #{i}"
+  end
+  ```
+
+### next Statement
+- Snippet:
+  ```ruby
+  for i in 0..5
+     if i < 2 then
+        next
+     end
+     puts "Value of local variable is #{i}"
+  end
+  ```
+  
+### redo Statement
+- Restarts this iteration of the most internal loop, without checking loop condition. Restarts yield or call if called within a block.
+- Snippet:
+  ```ruby
+  for i in 0..5
+     if i < 2 then
+        puts "Value of local variable is #{i}"
+        redo
+     end
+  end
+  ```
+
+### retry Statement
+- If retry appears in rescue clause of begin expression, restart from the beginning of the begin body.
+- Snippet:
+  ```ruby
+  begin
+     do_something # exception raised
+  rescue
+     # handles error
+     retry  # restart from beginning
+  end
+  ```
+- If retry appears in the iterator, the block, or the body of the for expression, restarts the invocation of the iterator call. Arguments to the iterator is re-evaluated.
+- Snippet:
+  ```ruby
+  for i in 0..5
+     retry if i > 2
+  puts "Value of local variable is #{i}"
+  end
+  ```
+
 
 
 **[⬆ back to top](#list-of-contents)**
