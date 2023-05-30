@@ -11,6 +11,8 @@
 ### 6. [If... Else... Case](#content-6)
 ### 7. [Loops](#content-7)
 ### 8. [Methods](#content-8)
+### 9. [Blocks](#content-9)
+### 10. [Modules and Mixins](#content-10)
 
 <br />
 
@@ -550,6 +552,157 @@ If Condition is true ? Then value X : Otherwise value Y
   alias $MATCH $&
   ```
 - undef Statement: This cancels the method definition. An undef cannot appear in the method body.
+
+## [Blocks](#list-of-contents) <span id="content-9"></span>
+- Snippet:
+  ```ruby
+  def test
+     puts "You are in the method"
+     yield
+     puts "You are again back to the method"
+     yield
+  end
+  test {puts "You are in the block"}
+  ```
+- Snippet:
+  ```ruby
+  def test
+     yield 5
+     puts "You are in the method test"
+     yield 100
+  end
+  test {|i| puts "You are in the block #{i}"}
+  
+  def something
+    yield 5, 3
+  end
+  
+  something{|a, b| puts "Something is something #{a} and #{b}"}
+  ```
+- Snippet:  
+  ```ruby
+  def test
+     yield
+  end
+  test{ puts "Hello world"}
+
+  def test(&block)
+    block.call
+  end
+  test { puts "Hello World!"}
+  ```
+- Snippet:
+  ```ruby
+  BEGIN { 
+     # BEGIN block code 
+     puts "BEGIN code block"
+  } 
+
+  END { 
+     # END block code 
+     puts "END code block"
+  }
+     # MAIN block code 
+  puts "MAIN code block"
+  ```
+
+
+## [Modules and Mixins](#list-of-contents) <span id="content-10"></span>
+- Modules define a namespace, a sandbox in which your methods and constants can play without having to worry about being stepped on by other methods and constants.
+- Module constants are named just like class constants, with an initial uppercase letter.
+- The method definitions look similar, too: Module methods are defined just like class methods.
+- Snippet:
+  ```ruby
+  # Module defined in trig.rb file
+
+  module Trig
+     PI = 3.141592654
+     def Trig.sin(x)
+     # ..
+     end
+     def Trig.cos(x)
+     # ..
+     end
+  end
+  ```
+- If a third program wants to use any defined module, it can simply load the module files using the Ruby require statement
+- Snippet:
+  ```ruby
+  $LOAD_PATH << '.'
+
+  require 'trig.rb'
+  require 'moral'
+
+  y = Trig.sin(Trig::PI/4)
+  wrongdoing = Moral.sin(Moral::VERY_BAD)
+  ```
+- Here we are using $LOAD_PATH << '.' to make Ruby aware that included files must be searched in the current directory.
+- If you do not want to use $LOAD_PATH then you can use require_relative to include files from a relative directory.
+- To embed a module in a class, you use the include statement in the class
+- Snippet:
+  ```ruby
+  # support.rb
+  module Week
+    FIRST_DAY = "Sunday"
+    def Week.weeks_in_month
+      puts "You have four weeks in a month"
+    end
+    def Week.weeks_in_year
+      puts "You have 52 weeks in a year"
+    end
+  end
+  ```
+- Usage of the above module:
+  ```ruby
+  $LOAD_PATH << '.'
+  require "support"
+
+  class Decade
+  include Week
+     no_of_yrs = 10
+     def no_of_months
+        puts Week::FIRST_DAY
+        number = 10*12
+        puts number
+     end
+  end
+  d1 = Decade.new
+  puts Week::FIRST_DAY
+  Week.weeks_in_month
+  Week.weeks_in_year
+  d1.no_of_months
+  ```
+- Mixins give you a wonderfully controlled way of adding functionality to classes. However, their true power comes out when the code in the mixin starts to interact with code in the class that uses it.
+- Snippet:
+  ```ruby
+  module A
+     def a1
+     end
+     def a2
+     end
+  end
+  module B
+     def b1
+     end
+     def b2
+     end
+  end
+
+  class Sample
+  include A
+  include B
+     def s1
+     end
+  end
+
+  samp = Sample.new
+  samp.a1
+  samp.a2
+  samp.b1
+  samp.b2
+  samp.s1
+  ```
+
 
 **[⬆ back to top](#list-of-contents)**
 
