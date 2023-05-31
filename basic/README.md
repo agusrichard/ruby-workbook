@@ -13,6 +13,7 @@
 ### 8. [Methods](#content-8)
 ### 9. [Blocks](#content-9)
 ### 10. [Modules and Mixins](#content-10)
+### 11. [Strings](#content-11)
 
 <br />
 
@@ -56,7 +57,7 @@
 - BEGIN: Declares code to be called before the program is run.
   ```text
   BEGIN {
-     code
+
   }
   ```
 - END: Declares code to be called at the end of the program.
@@ -703,6 +704,20 @@ If Condition is true ? Then value X : Otherwise value Y
   samp.s1
   ```
 
+
+## [Strings](#list-of-contents) <span id="content-11"></span>
+- Expression substitution:
+  ```ruby
+  x, y, z = 12, 36, 72
+  puts "The value of x is #{ x }."
+  puts "The sum of x and y is #{ x + y }."
+  puts "The average was #{ (x + y + z)/3 }."
+  ```
+- The default character set for Ruby is ASCII, whose characters may be represented by single bytes. If you use UTF-8, or another modern character set, characters may be represented in one to four bytes.
+  ```ruby
+  # You can change your character set using $KCODE at the beginning of your program
+  $KCODE = 'u'
+  ```
 
 **[⬆ back to top](#list-of-contents)**
 
