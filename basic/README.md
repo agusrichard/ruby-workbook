@@ -14,6 +14,9 @@
 ### 9. [Blocks](#content-9)
 ### 10. [Modules and Mixins](#content-10)
 ### 11. [Strings](#content-11)
+### 12. [Arrays](#content-12)
+### 13. [Hashes](#content-13)
+### 14. [Date and Time](#content-14)
 
 <br />
 
@@ -718,6 +721,77 @@ If Condition is true ? Then value X : Otherwise value Y
   # You can change your character set using $KCODE at the beginning of your program
   $KCODE = 'u'
   ```
+
+## [Strings](#list-of-contents) <span id="content-12"></span>
+
+### Creating Arrays:
+- Snippet:
+```ruby
+names = Array.new(20)
+
+names = Array.new(4, "mac")
+
+nums = Array.new(10) { |e| e = e * 2 }
+
+nums = Array.[](1, 2, 3, 4,5)
+
+nums = Array[1, 2, 3, 4,5]
+
+digits = Array(0..9)
+```
+
+### Array built-in methods
+- Snippet:
+```ruby
+digits = Array(0..9)
+num = digits.at(6)
+```
+
+
+## [Hashes](#list-of-contents) <span id="content-13"></span>
+
+### Creating Hashes
+- Snippet:
+```ruby
+months = Hash.new( "month" )
+
+puts "#{months[0]}"
+# month
+puts "#{months[72]}"
+# month
+
+
+H = Hash["a" => 100, "b" => 200]
+
+puts "#{H['a']}"
+# 100
+puts "#{H['b']}"
+# 200
+
+$, = ", "
+months = Hash.new( "month" )
+months = {"1" => "January", "2" => "February"}
+
+keys = months.keys
+puts "#{keys}"
+# ["1", "2"]
+```
+
+
+## [Date and Time](#list-of-contents) <span id="content-14"></span>
+
+### Getting Current Date and Time
+- Snippet:
+```ruby
+time1 = Time.new
+puts "Current Time : " + time1.inspect
+# Current Time : Mon Jun 02 12:02:39 -0700 2008
+
+# Time.now is a synonym:
+time2 = Time.now
+puts "Current Time : " + time2.inspect
+# Current Time : Mon Jun 02 12:02:39 -0700 2008
+```
 
 **[⬆ back to top](#list-of-contents)**
 
