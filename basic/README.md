@@ -17,6 +17,8 @@
 ### 12. [Arrays](#content-12)
 ### 13. [Hashes](#content-13)
 ### 14. [Date and Time](#content-14)
+### 15. [Ranges](#content-15)
+### 16. [File I/O](#content-16)
 
 <br />
 
@@ -726,72 +728,381 @@ If Condition is true ? Then value X : Otherwise value Y
 
 ### Creating Arrays:
 - Snippet:
-```ruby
-names = Array.new(20)
+  ```ruby
+  names = Array.new(20)
 
-names = Array.new(4, "mac")
+  names = Array.new(4, "mac")
 
-nums = Array.new(10) { |e| e = e * 2 }
+  nums = Array.new(10) { |e| e = e * 2 }
 
-nums = Array.[](1, 2, 3, 4,5)
+  nums = Array.[](1, 2, 3, 4,5)
 
-nums = Array[1, 2, 3, 4,5]
+  nums = Array[1, 2, 3, 4,5]
 
-digits = Array(0..9)
-```
+  digits = Array(0..9)
+  ```
 
 ### Array built-in methods
 - Snippet:
-```ruby
-digits = Array(0..9)
-num = digits.at(6)
-```
+  ```ruby
+  digits = Array(0..9)
+  num = digits.at(6)
+  ```
 
 
 ## [Hashes](#list-of-contents) <span id="content-13"></span>
 
 ### Creating Hashes
 - Snippet:
-```ruby
-months = Hash.new( "month" )
+  ```ruby
+  months = Hash.new( "month" )
 
-puts "#{months[0]}"
-# month
-puts "#{months[72]}"
-# month
+  puts "#{months[0]}"
+  # month
+  puts "#{months[72]}"
+  # month
 
 
-H = Hash["a" => 100, "b" => 200]
+  H = Hash["a" => 100, "b" => 200]
 
-puts "#{H['a']}"
-# 100
-puts "#{H['b']}"
-# 200
+  puts "#{H['a']}"
+  # 100
+  puts "#{H['b']}"
+  # 200
 
-$, = ", "
-months = Hash.new( "month" )
-months = {"1" => "January", "2" => "February"}
+  $, = ", "
+  months = Hash.new( "month" )
+  months = {"1" => "January", "2" => "February"}
 
-keys = months.keys
-puts "#{keys}"
-# ["1", "2"]
-```
+  keys = months.keys
+  puts "#{keys}"
+  # ["1", "2"]
+  ```
 
 
 ## [Date and Time](#list-of-contents) <span id="content-14"></span>
 
 ### Getting Current Date and Time
 - Snippet:
-```ruby
-time1 = Time.new
-puts "Current Time : " + time1.inspect
-# Current Time : Mon Jun 02 12:02:39 -0700 2008
+  ```ruby
+  time1 = Time.new
+  puts "Current Time : " + time1.inspect
+  # Current Time : Mon Jun 02 12:02:39 -0700 2008
 
-# Time.now is a synonym:
-time2 = Time.now
-puts "Current Time : " + time2.inspect
-# Current Time : Mon Jun 02 12:02:39 -0700 2008
-```
+  # Time.now is a synonym:
+  time2 = Time.now
+  puts "Current Time : " + time2.inspect
+  # Current Time : Mon Jun 02 12:02:39 -0700 2008
+  ```
+
+## [Range](#list-of-contents) <span id="content-15"></span>
+
+### Ranges as Sequences
+- Snippet:
+  ```ruby
+  (1..5)        #==> 1, 2, 3, 4, 5
+  (1...5)       #==> 1, 2, 3, 4
+  ('a'..'d')    #==> 'a', 'b', 'c', 'd'
+
+  $, =", "   # Array value separator
+  range1 = (1..10).to_a
+  range2 = ('bar'..'bat').to_a
+
+  puts "#{range1}"
+  puts "#{range2}"
+  # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  # ["bar", "bas", "bat"]
+
+  # Assume a range
+  digits = 0..9
+
+  puts digits.include?(5)
+  ret = digits.min
+  puts "Min value is #{ret}"
+
+  ret = digits.max
+  puts "Max value is #{ret}"
+
+  ret = digits.reject {|i| i < 5 }
+  puts "Rejected values are #{ret}"
+
+  digits.each do |digit|
+    puts "In Loop #{digit}"
+  end
+
+  # true
+  # Min value is 0
+  # Max value is 9
+  # Rejected values are 5, 6, 7, 8, 9
+  # In Loop 0
+  # In Loop 1
+  # In Loop 2
+  # In Loop 3
+  # In Loop 4
+  # In Loop 5
+  # In Loop 6
+  # In Loop 7
+  # In Loop 8
+  # In Loop 9
+  ```
+
+### Ranges as Conditions
+- Snippet:
+  ```ruby
+  score = 70
+
+  result = case score
+     when 0..40 then "Fail"
+     when 41..60 then "Pass"
+     when 61..70 then "Pass with Merit"
+     when 71..100 then "Pass with Distinction"
+     else "Invalid Score"
+  end
+
+  puts result
+  # Pass with Merit
+  ```
+
+### Ranges as Intervals
+- Snippet:
+  ```ruby
+  if ((1..10) === 5)
+     puts "5 lies in (1..10)"
+  end
+
+  if (('a'..'j') === 'c')
+     puts "c lies in ('a'..'j')"
+  end
+
+  if (('a'..'j') === 'z')
+     puts "z lies in ('a'..'j')"
+  end
+
+  # 5 lies in (1..10)
+  # c lies in ('a'..'j')
+  ```
+
+## [Iterators](#list-of-contents) <span id="content-15"></span>
+
+### each Iterator
+- Snippet:
+  ```ruby
+  ary = [1,2,3,4,5]
+  ary.each do |i|
+     puts i
+  end
+
+  a = [1,2,3,4,5]
+  b = a.collect{|x| 10*x}
+  ```
+
+## [File I/O](#list-of-contents) <span id="content-16"></span>
+
+### gets Statement
+- Snippet:
+  ```ruby
+  puts "Enter a value :"
+  val = gets
+  puts val
+  ```
+
+### print Statement
+- The print statement is similar to the puts statement. The only difference is that the puts statement goes to the next line after printing the contents, whereas with the print statement the cursor is positioned on the same line.
+- Snippet:
+  ```ruby
+  print "Hello World"
+  print "Good Morning"
+  # Hello WorldGood Morning
+  ```
+
+### Opening and Closing Files
+- Snippet:
+  ```ruby
+  aFile = File.new("filename", "mode")
+     # ... process the file
+  aFile.close
+
+  File.open("filename", "mode") do |aFile|
+    # ... process the file
+  end
+  ```
+
+### sysread and syswrite
+- Snippet:
+  ```ruby
+  aFile = File.new("input.txt", "r")
+  if aFile
+     content = aFile.sysread(20)
+     puts content
+  else
+     puts "Unable to open file!"
+  end
+
+  aFile = File.new("input.txt", "r+")
+  if aFile
+    aFile.syswrite("ABCDEF")
+  else
+    puts "Unable to open file!"
+  end
+  ```
+
+### IO.readlines and IO.foreach
+- Snippet:
+  ```ruby
+  arr = IO.readlines("input.txt")
+  puts arr[0]
+  puts arr[1]
+
+  IO.foreach("input.txt"){|block| puts block}
+  ```
+
+### Rename and Delete Files
+- Snippet:
+  ```ruby
+  # Rename a file from test1.txt to test2.txt
+  File.rename( "test1.txt", "test2.txt" )
+
+  # Delete file test2.txt
+  File.delete("test2.txt")
+  ```
+
+### File Inquiries 
+- Snippet:
+  ```ruby
+  File.open("file.rb") if File::exists?( "file.rb" )
+
+  File.file?( "text.txt" ) 
+  
+  # a directory
+  File::directory?( "/usr/local/bin" ) # => true
+
+  # a file
+  File::directory?( "file.rb" ) # => false
+  ```
+  
+### Navigating Through Directories
+- Snippet:
+  ```ruby
+  Dir.chdir("/usr/bin")
+
+  puts Dir.pwd # This will return something like /usr/bin
+
+  puts Dir.entries("/usr/bin").join(' ')
+
+  Dir.foreach("/usr/bin") do |entry|
+    puts entry
+  end
+  ```
+
+### Creating Files and Temporary Directories
+- Dir.tmpdir provides the path to the temporary directory on the current system, although the method is not available by default. To make Dir.tmpdir available it's necessary to use require 'tmpdir'.
+- You can use Dir.tmpdir with File.join to create a platform-independent temporary file
+- 
+- Snippet:
+  ```ruby
+  require 'tmpdir'
+     tempfilename = File.join(Dir.tmpdir, "tingtong")
+     tempfile = File.new(tempfilename, "w")
+     tempfile.puts "This is a temporary file"
+     tempfile.close
+     File.delete(tempfilename)
+
+  require 'tempfile'
+    f = Tempfile.new('tingtong')
+    f.puts "Hello"
+    puts f.path
+    f.close
+  ```
+
+## [Exceptions](#list-of-contents) <span id="content-17"></span>
+- Snippet:
+  ```ruby
+  begin
+     file = open("/unexistant_file")
+     if file
+        puts "File opened successfully"
+     end
+  rescue
+        file = STDIN
+  end
+  print file, "==", STDIN, "\n"
+  ```
+- retry Statement:
+  ```ruby
+  begin
+     file = open("/unexistant_file")
+     if file
+        puts "File opened successfully"
+     end
+  rescue
+     fname = "existant_file"
+     retry
+  end
+  ```
+- raise Statement:
+  ```ruby
+  begin  
+     puts 'I am before the raise.'  
+     raise 'An error has occurred.'  
+     puts 'I am after the raise.'  
+  rescue  
+     puts 'I am rescued.'  
+  end  
+  puts 'I am after the begin block.'  
+  
+  begin  
+     raise 'A test exception.'  
+  rescue Exception => e  
+    puts e.message  
+    puts e.backtrace.inspect  
+  end
+  ```
+- ensure Statement: ensure goes after the last rescue clause and contains a chunk of code that will always be executed as the block terminates.
+  ```ruby
+  begin
+     raise 'A test exception.'
+  rescue Exception => e
+     puts e.message
+     puts e.backtrace.inspect
+  ensure
+     puts "Ensuring execution"
+  end
+  ```
+- If the else clause is present, it goes after the rescue clauses and before any ensure.
+- The body of an else clause is executed only if no exceptions are raised by the main body of code.
+  ```ruby
+  begin 
+     #.. process 
+     #..raise exception
+  rescue 
+     # .. handle error
+  else
+     #.. executes if there is no exception
+  ensure 
+     #.. finally ensure execution
+     #.. This will always execute.
+  end
+  ```
+  
+### Class Exception
+- Example:
+  ```ruby
+  class FileSaveError < StandardError
+     attr_reader :reason
+     def initialize(reason)
+        @reason = reason
+     end
+  end
+  
+  File.open(path, "w") do |file|
+  begin
+    # Write out the data ...
+  rescue
+    # Something went wrong!
+    raise FileSaveError.new($!)
+  end
+  end
+  ```
 
 **[⬆ back to top](#list-of-contents)**
 
