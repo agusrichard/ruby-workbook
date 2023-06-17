@@ -1,7 +1,6 @@
 # Rest API Financial Management
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a learning project to build a RESTAPI financial management application
 
 Things you may want to cover:
 
