@@ -1,6 +1,6 @@
 # Rest API Financial Management
 
-This is a learning project to build a RESTAPI financial management application
+This is a learning project to build a RESTAPI financial management application. We'll start working on this next week.
 
 Things you may want to cover:
 
