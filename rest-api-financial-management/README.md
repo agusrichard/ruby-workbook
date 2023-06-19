@@ -1,23 +1,17 @@
 # Rest API Financial Management
 
-This is a learning project to build a RESTAPI financial management application. We'll start working on this next week.
+This is a learning project to build a RESTAPI financial management application.
+The idea of this application is a user can create a financial record.
 
-Things you may want to cover:
+User:
+- username: string
+- password: string
+- fullname: string
 
-* Ruby version
+Record:
+- user: User
+- date: datetime
+- description: text
+- amount: integer
+- source: text
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
