@@ -1,14 +1,33 @@
 version: '3'
 services:
   db:
-    image: postgres
+    image: postgres:14.2-alpine
+    container_name: rest-api-financial-management-db
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
-  api:
+      - postgres_data:/var/lib/postgresql/data
+    command: "postgres -c 'max_connections=500'"
+    environment:
+      POSTGRES_DB: financial_management_db
+      POSTGRES_USER: sekardayuhana
+      POSTGRES_PASSWORD: syarifahkhaerunisa
+    ports:
+      - "5432:5432"
+  myapp-web:
     build: .
+    command: "bundle exec rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      DB_HOST: db
+      DB_NAME: financial_management_db
+      DB_USERNAME: sekardayuhana
+      DB_PASSWORD: syarifahkhaerunisa!
     volumes:
-      - .:/app
+      - .:/app:cached
     ports:
       - "3000:3000"
     depends_on:
       - db
+volumes:
+  postgres_data: {}
+networks:
+  default:
+    name: financial_management_net
