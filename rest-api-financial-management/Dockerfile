@@ -1,21 +1,9 @@
 FROM ruby:3.2.2
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN mkdir /app
 WORKDIR /app
-
-COPY Gemfile* /app/
-
-RUN gem install bundler
-
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
 RUN bundle install
-
-RUN bundle binstubs --all
-
-RUN touch $HOME/.bashrc
-
-RUN echo "alias ll='ls -alF'" >> $HOME/.bashrc
-RUN echo "alias la='ls -A'" >> $HOME/.bashrc
-RUN echo "alias l='ls -CF'" >> $HOME/.bashrc
-RUN echo "alias q='exit'" >> $HOME/.bashrc
-RUN echo "alias c='clear'" >> $HOME/.bashrc
-
-CMD [ "/bin/bash" ]
+EXPOSE 3000
+CMD ["rails", "server", "-b", "0.0.0.0"]

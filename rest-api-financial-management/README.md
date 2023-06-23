@@ -1,17 +1,24 @@
-# Rest API Financial Management
+# README
 
-This is a learning project to build a RESTAPI financial management application.
-The idea of this application is a user can create a financial record.
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-User:
-- username: string
-- password: string
-- fullname: string
+Things you may want to cover:
 
-Record:
-- user: User
-- date: datetime
-- description: text
-- amount: integer
-- source: text
+* Ruby version
 
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
