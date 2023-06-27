@@ -23,7 +23,7 @@ begin
 rescue
   puts "I'm saved because I love her"
 else
-  puts "Yes, I love her indeed. Indeed!"
+  puts "Yes, I love her indeed. Indeed! I love her more"
 ensure
   puts "Just want to make sure that I truly love her"
 end
