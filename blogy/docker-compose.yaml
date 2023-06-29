@@ -2,7 +2,7 @@ version: '3'
 services:
   db:
     image: postgres
-    container_name: rest-api-financial-management-db
+    container_name: bloggy-db
     environment:
       - POSTGRES_USER=rest-api-financial-management
       - POSTGRES_PASSWORD=password
@@ -10,7 +10,7 @@ services:
       - ./tmp/db:/var/lib/postgresql/data
   api:
     build: .
-    container_name: rest-api-financial-management-api
+    container_name: bloggy-api
     volumes:
       - .:/app
     ports:
