@@ -2,15 +2,15 @@ version: '3'
 services:
   db:
     image: postgres
-    container_name: bloggy-db
+    container_name: blogy-db
     environment:
-      - POSTGRES_USER=rest-api-financial-management
+      - POSTGRES_USER=blogy
       - POSTGRES_PASSWORD=password
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
   api:
     build: .
-    container_name: bloggy-api
+    container_name: blogy-api
     volumes:
       - .:/app
     ports:
