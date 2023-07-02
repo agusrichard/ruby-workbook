@@ -1,28 +1,28 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :find_user, only: [:show, :update, :destroy]
+  before_action :authorize_request, except: :create
   def index
     @users = User.all
-    render json: @users, except: [:password]
+    render json: @users, except: [:password_digest]
   end
 
   def show
-    render json: @user.as_json(except: [:password])
+    user = User.find(params[:id])
+    render json: user.as_json(except: [:password_digest])
   end
 
   def create
-    user = User.new(user_params)
-    user.password = BCrypt::Password.create(params[:password])
-    if user.save
-      render json: user.as_json(except: [:password])
+    @user = User.new(user_params)
+    if @user.save
+      render json: @user.as_json(except: [:password_digest]), status: :created
     else
-      render error: { error: 'Unable to create user' }, status: 400
+      render json: { errors: @user.errors.full_messages },
+             status: :unprocessable_entity
     end
   end
 
   def update
-    if @user
-      puts "params: #{params}"
-      @user.update({description: params[:user][:description]})
+    if @current_user
+      @current_user.update({description: params[:user][:description]})
       render json: { message: 'User is successfully updated' }, status: 200
     else
       render json: { error: 'Unable to update user'}, status: 400
@@ -30,8 +30,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def destroy
-    if @user
-      @user.destroy
+    if @current_user
+      @current_user.destroy
       render json: { message: 'User is successfully deleted' }, status: 200
     else
       render json: { error: 'Unable to delete user' }, status: 400
@@ -40,10 +40,6 @@ class Api::V1::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:username, :password)
-  end
-
-  def find_user
-    @user = User.find(params[:id])
+    params.permit(:username, :email, :password)
   end
 end
