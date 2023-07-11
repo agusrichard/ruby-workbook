@@ -4,22 +4,22 @@ This is a learning project by building a simple blog api server. It's using JWT 
 
 ### Models
 
-User:
+#### User:
 - username
 - email
 - password
 - description
 
-Like:
+#### Like:
 - user
 - content
 - user and content relationship is unique
 
-Comment:
+#### Comment:
 - user
 - text
 
-Content:
+#### Content:
 - title
 - text
 - likes
@@ -28,24 +28,24 @@ Content:
 
 ### Controllers
 
-User:
+#### User:
 - User can sign-up with username/email and password
 - User can login with username/email and password, then get jwt token
 - User can update their profile
 
-Content:
+#### Content:
 - User can write a content
 - User can update a content
 - User can delete a content
 - User can get all contents from all users
 - User can get all contents from a particular user
 
-Like:
+#### Like:
 - User can like a content
 - User can unlike a content
 - User can get all likes for a content
 
-Comment:
+#### Comment:
 - User can write comments to a content
 - User can delete their comments
 - User can edit their comments
