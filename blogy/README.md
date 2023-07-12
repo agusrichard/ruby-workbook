@@ -1,6 +1,7 @@
 # Blogy: a simple blog api server 
 
 This is a learning project by building a simple blog api server. It's using JWT as an authentication method.
+I'll be back to you after I finish my work
 
 ### Models
 
