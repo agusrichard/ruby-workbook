@@ -61,7 +61,12 @@ rails generate model User username:string email:string password_digest:string
 rails generate controller api/v1/Users
 
 # Generate Post's model
-rails generate model Post title:string content:text
+rails generate model Post title:string content:text user:references
 # Generate Post's controller
 rails generate controller api/v1/Posts
+
+# Generate Comment's model
+rails generate model Comment user:references post:references text:text
+# Generate Comment's controller
+rails generate controller api/v1/Comments
 ```
