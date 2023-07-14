@@ -20,9 +20,10 @@ I'll be back to you after I finish my work
 - user
 - text
 
-#### Content:
+#### Post:
 - title
-- text
+- content
+- user
 - likes
 - comments
 
@@ -51,3 +52,16 @@ I'll be back to you after I finish my work
 - User can delete their comments
 - User can edit their comments
 - User can get all comments to a content
+
+### Commands
+```shell
+# Generate User's model
+rails generate model User username:string email:string password_digest:string
+# Generate User's controller
+rails generate controller api/v1/Users
+
+# Generate Post's model
+rails generate model Post title:string content:text
+# Generate Post's controller
+rails generate controller api/v1/Posts
+```
