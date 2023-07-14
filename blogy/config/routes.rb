@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
       resources :posts do
         resources :comments
+        resources :likes
       end
 
       get '/*a', to: 'application#not_found'

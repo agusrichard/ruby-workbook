@@ -1,6 +1,6 @@
 class Api::V1::CommentsController < ApplicationController
   before_action :authorize_request
-  before_action :find_post, only: [:index, :show, :create, :update, :destroy]
+  before_action :find_post
   before_action :find_comment, only: [:show, :update, :destroy]
 
   def index

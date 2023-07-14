@@ -69,4 +69,9 @@ rails generate controller api/v1/Posts
 rails generate model Comment user:references post:references text:text
 # Generate Comment's controller
 rails generate controller api/v1/Comments
+
+# Generate Like's model
+rails generate model Like user:references post:references
+# Generate Like's controller
+rails generate controller api/v1/Likes
 ```
